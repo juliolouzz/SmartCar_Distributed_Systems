@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.smartcar.grpc";
+option java_outer_classname = "ComfortControlProto";
+
+service ComfortControlService {
+    rpc AdjustSeatPosition (AdjustSeatPositionRequest) returns (AdjustSeatPositionResponse);
+    rpc RegulateCabinTemperature (RegulateCabinTemperatureRequest) returns (RegulateCabinTemperatureResponse);
+    rpc OptimizeInCarEntertainment (OptimizeInCarEntertainmentRequest) returns (OptimizeInCarEntertainmentResponse);
+    rpc StreamSeatAdjustments (stream SeatAdjustmentRequest) returns (SeatAdjustmentResponse); // Client-side streaming RPC
+}
+
+message AdjustSeatPositionRequest {
+    string seatId = 1;
+    string position = 2;
+}
+
+message AdjustSeatPositionResponse {
+    string status = 1;
+}
+
+message RegulateCabinTemperatureRequest {
+    float temperature = 1;
+}
+
+message RegulateCabinTemperatureResponse {
+    string status = 1;
+}
+
+message OptimizeInCarEntertainmentRequest {
+    string preferences = 1;
+}
+
+message OptimizeInCarEntertainmentResponse {
+    string entertainmentSetup = 1;
+}
+
+message SeatAdjustmentRequest {
+    string seatId = 1;
+    string position = 2;
+}
+
+message SeatAdjustmentResponse {
+    string status = 1;
+}

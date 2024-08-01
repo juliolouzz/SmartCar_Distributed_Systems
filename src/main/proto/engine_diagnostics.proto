@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.smartcar.grpc";
+option java_outer_classname = "EngineDiagnosticsProto";
+
+service EngineDiagnosticsService {
+    rpc RunDiagnostics (RunDiagnosticsRequest) returns (RunDiagnosticsResponse);
+    rpc PredictMaintenanceNeeds (PredictMaintenanceNeedsRequest) returns (PredictMaintenanceNeedsResponse);
+    rpc ReportEngineHealth (ReportEngineHealthRequest) returns (ReportEngineHealthResponse);
+    rpc GetLiveDiagnostics (LiveDiagnosticsRequest) returns (stream LiveDiagnosticsResponse); // Server-side streaming RPC
+}
+
+message RunDiagnosticsRequest {
+    string engineId = 1;
+}
+
+message RunDiagnosticsResponse {
+    string diagnosticReport = 1;
+}
+
+message PredictMaintenanceNeedsRequest {
+    string engineId = 1;
+}
+
+message PredictMaintenanceNeedsResponse {
+    string maintenanceSchedule = 1;
+}
+
+message ReportEngineHealthRequest {
+    string engineId = 1;
+}
+
+message ReportEngineHealthResponse {
+    string healthReport = 1;
+}
+
+message LiveDiagnosticsRequest {
+    string engineId = 1;
+}
+
+message LiveDiagnosticsResponse {
+    string statusUpdate = 1;
+}

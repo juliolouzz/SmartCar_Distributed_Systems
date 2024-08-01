@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.smartcar.grpc";
+option java_outer_classname = "SafetyNavigationProto";
+
+service SafetyNavigationService {
+    rpc RealTimeTrafficAnalysis (RealTimeTrafficAnalysisRequest) returns (RealTimeTrafficAnalysisResponse);
+    rpc HazardDetectionAndAlerts (HazardDetectionAndAlertsRequest) returns (HazardDetectionAndAlertsResponse);
+    rpc RouteOptimization (RouteOptimizationRequest) returns (RouteOptimizationResponse);
+    rpc BidirectionalRouteGuidance (stream RouteGuidanceRequest) returns (stream RouteGuidanceResponse); // Bidirectional streaming RPC
+}
+
+message RealTimeTrafficAnalysisRequest {
+    string location = 1;
+}
+
+message RealTimeTrafficAnalysisResponse {
+    string trafficReport = 1;
+}
+
+message HazardDetectionAndAlertsRequest {
+    string location = 1;
+}
+
+message HazardDetectionAndAlertsResponse {
+    string hazardAlerts = 1;
+}
+
+message RouteOptimizationRequest {
+    string destination = 1;
+}
+
+message RouteOptimizationResponse {
+    string optimizedRoute = 1;
+}
+
+message RouteGuidanceRequest {
+    string currentLocation = 1;
+    string nextTurn = 2;
+}
+
+message RouteGuidanceResponse {
+    string guidanceMessage = 1;
+}
